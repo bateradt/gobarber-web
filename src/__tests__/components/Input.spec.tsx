@@ -28,12 +28,12 @@ describe('Input component', () => {
   });
 
   it('should render highlight on input focus', async () => {
-    const { getByPlaceholderText } = render(
+    const { getByPlaceholderText, getByTestId } = render(
       <Input name="email" placeholder="E-mail" />
     );
 
     const inputElement = getByPlaceholderText('E-mail');
-    const containerElement = screen.getByTestId('E-mail');
+    const containerElement = getByTestId('input-container');
 
     fireEvent.focus(inputElement);
 
@@ -44,12 +44,12 @@ describe('Input component', () => {
   });
 
   it('should not render highlight on input focus', async () => {
-    const { getByPlaceholderText } = render(
+    const { getByPlaceholderText, getByTestId } = render(
       <Input name="email" placeholder="E-mail" />
     );
 
     const inputElement = getByPlaceholderText('E-mail');
-    const containerElement = screen.getByTestId('input-container');
+    const containerElement = getByTestId('input-container');
 
     fireEvent.blur(inputElement);
 
@@ -60,12 +60,12 @@ describe('Input component', () => {
   });
 
   it('should keep input border highlight when input filled', async () => {
-    const { getByPlaceholderText } = render(
+    const { getByPlaceholderText, getByTestId } = render(
       <Input name="email" placeholder="E-mail" />
     );
 
     const inputElement = getByPlaceholderText('E-mail');
-    const containerElement = screen.getByTestId('input-container');
+    const containerElement = getByTestId('input-container');
 
     fireEvent.change(inputElement, {
       target: { value: 'email@email.com.br' },

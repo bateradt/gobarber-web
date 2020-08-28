@@ -42,7 +42,7 @@ const Signin: React.FC = () => {
 
       await signIn({ email: data.email, password: data.password });
 
-      console.log('chamou');
+
       history.push('/dashboard');
     } catch (err) {
 
@@ -70,7 +70,7 @@ const Signin: React.FC = () => {
             <h1>Faça seu logon</h1>
             <Input icon={FiMail} name="email" placeholder="E-mail" />
             <Input icon={FiLock} name="password" type="password" placeholder="Senha" autoComplete="on" />
-            <Button type="submit">Entrar</Button>
+            <Button type="submit" data-testid="button-entrar">Entrar</Button>
             <Link to="/forgot_password">Esqueci a senha</Link>
           </Form>
           <Link to="/signup"><FiLogIn />Criar conta</Link>

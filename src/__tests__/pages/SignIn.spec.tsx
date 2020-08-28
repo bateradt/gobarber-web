@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import Signin from '../../pages/Signin';
 
-jest.setTimeout(30000);
+jest.setTimeout(50000);
 
 const mockedHistoryPush = jest.fn(); //crio uma variavel que irá apontar para a função vazia do Jest
 const mockedSignIn = jest.fn();
@@ -37,21 +37,24 @@ jest.mock('../../hooks/auth', () => {
 describe('Signin Page', () => {
   beforeEach(() => {
     mockedHistoryPush.mockClear();
-    mockedAddToast.mockClear();
-    mockedSignIn.mockClear();
+    // mockedAddToast.mockClear();
+    // mockedSignIn.mockClear();
   })
 
 
   it('should be able to sign in', async () => {
     // const result = render(<SignIn />); // renderiza a página inteira e retorna em uma variavel
-    const { getByPlaceholderText, getByText } = render(<Signin />); // desestruturação do objeto e pego as funções que vou utilizar
+    const { getByPlaceholderText, getByText, getByTestId } = render(<Signin />); // desestruturação do objeto e pego as funções que vou utilizar
 
     const emailField = getByPlaceholderText('E-mail'); // neste caso ele está buscando na página de SignIn o campo que tenha o placeholder com o nome "E-mail"
     const passwordField = getByPlaceholderText('Senha'); //mesmo caso acima
-    const ButtonElement = getByText('Entrar'); //captura pelo conteúdo do campo neste caso o Button tem o texto Entrar.
+    // const ButtonElement = getByText('Entrar'); //captura pelo conteúdo do campo neste caso o Button tem o texto Entrar.
 
-    fireEvent.change(emailField, { targe: { value: 'jonhdoe@example.com' } });
-    fireEvent.change(passwordField, { targe: { value: '123456' } });
+    const ButtonElement = getByTestId('button-entrar');
+
+    fireEvent.change(emailField, { target: { value: 'jonhdoe@example.com' } });
+    fireEvent.change(passwordField, { target: { value: '123456' } });
+
     // está função fireEvent irá disparar qualquer evento que o usuário possa executar na página da web, no caso acima
     //ele está simulando o OnChange de um input, ou seja, conforme vai digitando o conteúdo
     fireEvent.click(ButtonElement);
@@ -75,8 +78,8 @@ describe('Signin Page', () => {
     const passwordField = getByPlaceholderText('Senha'); //mesmo caso acima
     const ButtonElement = getByText('Entrar'); //captura pelo conteúdo do campo neste caso o Button tem o texto Entrar.
 
-    fireEvent.change(emailField, { targe: { value: 'not-valid-email' } });
-    fireEvent.change(passwordField, { targe: { value: '123456' } });
+    fireEvent.change(emailField, { target: { value: 'not-valid-email' } });
+    fireEvent.change(passwordField, { target: { value: '123456' } });
     // está função fireEvent irá disparar qualquer evento que o usuário possa executar na página da web, no caso acima
     //ele está simulando o OnChange de um input, ou seja, conforme vai digitando o conteúdo
     fireEvent.click(ButtonElement);
@@ -87,7 +90,6 @@ describe('Signin Page', () => {
     //irá simular isso
 
     await waitFor(() => {
-      console.log('wait');
       expect(mockedHistoryPush).not.toHaveBeenCalled();
     });
   });
@@ -104,8 +106,8 @@ describe('Signin Page', () => {
     const passwordField = getByPlaceholderText('Senha'); //mesmo caso acima
     const ButtonElement = getByText('Entrar'); //captura pelo conteúdo do campo neste caso o Button tem o texto Entrar.
 
-    fireEvent.change(emailField, { targe: { value: 'jonhdoe@example.com' } });
-    fireEvent.change(passwordField, { targe: { value: '123456' } });
+    fireEvent.change(emailField, { target: { value: 'jonhdoe@example.com' } });
+    fireEvent.change(passwordField, { target: { value: '123456' } });
     // está função fireEvent irá disparar qualquer evento que o usuário possa executar na página da web, no caso acima
     //ele está simulando o OnChange de um input, ou seja, conforme vai digitando o conteúdo
     fireEvent.click(ButtonElement);
