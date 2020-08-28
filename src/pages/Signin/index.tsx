@@ -42,6 +42,7 @@ const Signin: React.FC = () => {
 
       await signIn({ email: data.email, password: data.password });
 
+      console.log('chamou');
       history.push('/dashboard');
     } catch (err) {
 
