@@ -65,8 +65,6 @@ describe('Auth hook', () => {
       wrapper: AuthProvider,
     });
 
-    console.log(result.current);
-
     expect(result.current.user.email).toEqual('jonhdoe@example.com.br');
   });
 

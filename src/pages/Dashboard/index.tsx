@@ -86,7 +86,7 @@ const Dashboard: React.FC = () => {
   }, [selectedDate]);
 
   useEffect(() => {
-    console.log('/appointments/myschedule');
+    // console.log('/appointments/myschedule');
     api.get<IAppointment[]>('/appointments/myschedule', {
       params: {
         year: selectedDate.getFullYear(),
